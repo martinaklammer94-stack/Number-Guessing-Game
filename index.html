@@ -11,13 +11,13 @@
     <div class="container">
       <h1 id="headline">Bitte rate die Zahl!</h1>
       <h2 id="displayTries">Versuche: 0</h2>
-      <form
-        onsubmit="
-          guessTheNumber();
-          return false;
-        "
-      >
-        <input type="number" required placeholder="Bitte Zahl eingeben..." />
+      <form id="guessForm">
+        <input
+          id="guessedNumber"
+          type="number"
+          required
+          placeholder="Bitte Zahl eingeben..."
+        />
         <button>Raten!</button>
       </form>
     </div>
