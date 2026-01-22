@@ -1,2 +1,2 @@
 # Number-Guessing-Game
-Das ist mein erstes Projekt mit Java Script. 
+Das ist mein erstes Projekt mit JavaScript. 
