@@ -1,58 +1,72 @@
+// Zufällige Zahl zwischen 1 und 10 erzeugen, die erraten werden soll
 let numberToGuess = Math.round(Math.random() * 10) + 1;
+// Zählt die Anzahl der Versuche
 let tries = 0;
-let myNumber = Number(document.querySelector("#guessedNumber").value);
 
+// HTML-Elemente aus dem Dokument auswählen
 const form = document.querySelector("#guessForm");
 const headline = document.querySelector("#headline");
 const displayTries = document.querySelector("#displayTries");
 const input = document.querySelector("#guessedNumber");
 
+// Hauptfunktion für das Zahlen-Raten
 function guessTheNumber() {
-  // in Zahl konvertieren
+  // Eingabewert auslesen und in eine Zahl umwandeln
   let myNumber = +input.value;
-
-  // Versuche steigen um 1 an und werden angezeigt
+  // Versuche erhöhen
   tries++;
-  displayTries.innerHTML = "Versuche: " + tries; // Anzahl der Versuche wird angezeigt
+  // Anzahl der Versuche im HTML anzeigen
+  displayTries.innerHTML = "Versuche: " + tries;
 
-  //
-  if (myNumber < 1 || myNumber > 10) {
-    headline.innerHTML = "Bitte gib eine Zahl zwischen 1 und 10 ein!";
-    input.value = "";
-    return;
-  }
-
+  // Prüfen, ob die Zahl richtig ist
   if (numberToGuess === myNumber) {
     headline.innerHTML = "Glückwunsch! 😁 Du hast gewonnen! 🙌";
+
+    // Konfetti-Animation starten
     let jsConfetti = new JSConfetti();
     jsConfetti.addConfetti();
 
-    setTimeout(resetGame, 50000);
+    // Spiel nach 5 Sekunden zurücksetzen
+    setTimeout(resetGame, 5000);
+
     return;
   }
 
+  // Hinweis, wenn die Zahl zu klein ist
   if (numberToGuess > myNumber) {
     headline.innerHTML = "Deine Zahl ist zu klein... 😔";
   }
 
+  // Hinweis, wenn die Zahl zu groß ist
   if (numberToGuess < myNumber) {
     headline.innerHTML = "Deine Zahl ist zu groß... 😔";
   }
 
+  // Eingabefeld leeren für den nächsten Versuch
   input.value = "";
 }
 
+// Setzt das Spiel zurück
 function resetGame() {
-  numberToGuess = Math.round(Math.random() * 10);
+  // Neue Zufallszahl erzeugen
+  numberToGuess = Math.round(Math.random() * 10) + 1;
+  // Versuche zurücksetzen
   tries = 0;
-
+  // Anzeige zurücksetzen
   displayTries.innerHTML = "Versuche: 0";
+  // Eingabefeld leeren
   document.querySelector("#guessedNumber").value = "";
+  // Hinweis zurücksetzen
+  headline.innerHTML = "Bitte rate die Zahl";
 }
 
+// Wird aufgerufen, wenn das Formular abgeschickt wird
 function submitHandler(event) {
+  // Verhindert das automatische Neuladen der Seite
   event.preventDefault();
+  // Startet das Spiel
   guessTheNumber();
 }
 
+// EventListener für das Formular hinzufügen
 form.addEventListener("submit", submitHandler);
