@@ -5,14 +5,17 @@ let myNumber = Number(document.querySelector("#guessedNumber").value);
 const form = document.querySelector("#guessForm");
 const headline = document.querySelector("#headline");
 const displayTries = document.querySelector("#displayTries");
+const input = document.querySelector("#guessedNumber");
 
 function guessTheNumber() {
-  const input = document.querySelector("#guessedNumber");
-  let myNumber = +input.value; // in Zahl konvertieren
+  // in Zahl konvertieren
+  let myNumber = +input.value;
 
+  // Versuche steigen um 1 an und werden angezeigt
   tries++;
-  displayTries.innerHTML = "Versuche: " + tries;
+  displayTries.innerHTML = "Versuche: " + tries; // Anzahl der Versuche wird angezeigt
 
+  //
   if (myNumber < 1 || myNumber > 10) {
     headline.innerHTML = "Bitte gib eine Zahl zwischen 1 und 10 ein!";
     input.value = "";
@@ -25,8 +28,6 @@ function guessTheNumber() {
     jsConfetti.addConfetti();
 
     setTimeout(resetGame, 50000);
-
-    resetGame();
     return;
   }
 
